@@ -1,12 +1,20 @@
 <template>
-  <div class="home"></div>
+  <div class="home">{{ phoneDisplayed }}</div>
 </template>
 
 <script>
-// @ is an alias to /src
+import { useStore } from '@/store'
 
 export default {
   name: 'HomeView',
   components: {},
+  setup() {
+    const store = useStore()
+    const phoneDisplayed = store.currentPhone
+    return {
+      store,
+      phoneDisplayed,
+    }
+  },
 }
 </script>

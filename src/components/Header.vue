@@ -1,6 +1,16 @@
 <template>
-  <div class="text-center">
-    <div>
+  <div class="header">
+    <a
+      ref="hamburger"
+      @click="toggleSideBar"
+      id="hamburger"
+      class="hide-for-desktop"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+    <span>
       API by
       <a
         class="text-blue-300"
@@ -8,16 +18,7 @@
         target="_blank"
         >azharimm</a
       >
-      <p>{{ store.currentPhone }}</p>
-    </div>
-    <el-select v-model="value" filterable placeholder="Select">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select>
+    </span>
   </div>
 </template>
 
@@ -29,36 +30,52 @@ export default {
   name: 'Header',
   setup() {
     const store = useStore()
-    const value = ref('')
-    const options = [
-      {
-        value: 'Option1',
-        label: 'Option1',
-      },
-      {
-        value: 'Option2',
-        label: 'Option2',
-      },
-      {
-        value: 'Option3',
-        label: 'Option3',
-      },
-      {
-        value: 'Option4',
-        label: 'Option4',
-      },
-      {
-        value: 'Option5',
-        label: 'Option5',
-      },
-    ]
+
     return {
-      value,
-      options,
       store,
     }
+  },
+  methods: {
+    toggleSideBar() {
+      this.$refs.hamburger.classList.toggle('open')
+      this.store.$patch({
+        sideBarOpen: !this.store.sideBarOpen,
+      })
+    },
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+#hamburger {
+  cursor: pointer;
+}
+
+#hamburger > span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background-color: darkblue;
+  transition: all 300ms ease-in-out;
+}
+#hamburger > span:not(:last-child) {
+  margin-bottom: 5px;
+}
+#hamburger.open > span:first-child {
+  transform: rotate(45deg);
+  transform-origin: 3.1px center;
+}
+#hamburger.open > span:nth-child(2) {
+  opacity: 0;
+}
+#hamburger.open > span:last-child {
+  transform: rotate(-45deg);
+  transform-origin: 3.1px center;
+}
+</style>

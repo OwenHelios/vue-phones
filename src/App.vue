@@ -1,7 +1,7 @@
 <template>
   <el-container class="container">
     <SideBar />
-    <el-container>
+    <el-container class="right-container">
       <el-header><Header /></el-header>
       <el-main><router-view /></el-main>
     </el-container>
@@ -22,6 +22,22 @@ export default {
 
 <style>
 .container {
+  width: 100%;
+}
+
+.el-container {
   height: 100vh;
+  transition: all 200ms ease-in-out;
+}
+
+.el-header {
+  background-color: rgb(190, 37, 250);
+}
+
+@media (max-width: 640px) {
+  .right-container {
+    position: absolute;
+    width: 100%;
+  }
 }
 </style>

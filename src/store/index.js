@@ -4,6 +4,7 @@ export const useStore = defineStore('main', {
   state: () => {
     return {
       currentPhone: '',
+      sideBarOpen: false,
     }
   },
 })

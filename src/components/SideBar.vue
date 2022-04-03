@@ -1,6 +1,5 @@
 <template>
   <el-aside
-    class="sidebar"
     v-loading="loading"
     element-loading-text="Loading..."
     element-loading-background="rgba(0,0,0,0.6)"
@@ -141,7 +140,14 @@ export default {
 </script>
 
 <style scoped>
-.sidebar {
+.el-aside {
   background-color: #999;
+  transition: all 200ms ease-in-out;
+}
+
+@media (max-width: 640px) {
+  .el-aside {
+    transform: translateX(-300px);
+  }
 }
 </style>
